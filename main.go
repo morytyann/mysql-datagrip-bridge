@@ -18,6 +18,7 @@ const dataSourcesTemplate = `<?xml version="1.0" encoding="UTF-8"?>
       <jdbc-url>jdbc:mysql://${host}:${port}/?user=${username}&amp;password=${password}</jdbc-url>
       <time-zone>Asia/Shanghai</time-zone>
       <working-dir>$ProjectFileDir$</working-dir>
+      <keep-alive enable="true" timeout="30" />
     </data-source>
   </component>
 </project>
@@ -29,9 +30,16 @@ const dataSourcesLocalTemplate = `<?xml version="1.0" encoding="UTF-8"?>
     <data-source name="${name}" uuid="${uuid}">
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" negative="1" />
+          <node kind="schema">
+            <name qname="qingdao_db" />
+            <name qname="qingdao_jianyan" />
+            <name qname="sdjc" />
+            <name qname="workday" />
+		  </node>
         </introspection-scope>
       </schema-mapping>
+      <introspection-level>3</introspection-level>
+      <load-sources>user_and_system_sources</load-sources>
     </data-source>
   </component>
 </project>
