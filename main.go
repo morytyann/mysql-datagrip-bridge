@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
@@ -94,5 +95,9 @@ func main() {
 	_ = dataSourceLocalFile.Close()
 	// 打开DataGrip
 	cwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-	_ = exec.Command(filepath.Join(cwd, "datagrip64.exe"), projectPath).Start()
+	var executable = "datagrip"
+	if runtime.GOOS == "windows" {
+		executable += ".exe"
+	}
+	_ = exec.Command(filepath.Join(cwd, executable), projectPath).Start()
 }
